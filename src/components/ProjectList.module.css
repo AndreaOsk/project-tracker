@@ -8,13 +8,17 @@
   padding: 8px;
   cursor: pointer;
   border-radius: 4px;
+  background-color: #ffffff;
+  color: #333333;
+  transition: background-color 0.2s ease;
 }
 
 .item:hover {
-  background-color: #f0f0f0;
+  background-color: #efece7; /* subtle warm hover */
 }
 
 .selected {
-  background-color: #e8f0ff;
+  background-color: #e0ddd4; /* slightly deeper warm beige */
   font-weight: 500;
+  color: #333333;
 }

@@ -98,6 +98,32 @@ const addProject = ({ name, status}) => {
   setProjectsState((prev) => [...prev,newProject]);
 };
 
+const deleteProject = (projectId) => {
+  setProjectsState(prev => prev.filter(p => p.id !== projectId));
+
+  //If the deleted project is currently selected, clear selection
+  if (selectedProject?.id === projectId) {
+    setSelectedProject(null);
+  }
+};
+
+const deleteAction = (projectId, actionId) => {
+  setProjectsState(prev =>
+    prev.map(p => 
+      p.id === projectId
+        ? {...p, actions: p.actions.filter(a => a.id !== actionId)}
+      : p
+    )
+  );
+
+if (selectedProject?.id === projectId) {
+  setSelectedProject(prev => ({
+    ...prev,
+    actions: prev.actions.filter(a => a.id !== actionId)
+    }));
+  }
+};
+
   //Return - anything after a return in the same function will not run
   return (
     <div className={styles.container}>
@@ -114,6 +140,8 @@ const addProject = ({ name, status}) => {
       project={selectedProject}
       toggleAction={toggleAction}
       addAction={addAction}
+      onDeleteProject={deleteProject}
+      onDeleteAction={deleteAction}
       />
     </div>
   );

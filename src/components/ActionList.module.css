@@ -10,6 +10,8 @@
   padding: 6px 8px;
   border-radius: 4px;
   cursor: pointer;
+  background-color: #ffffff;
+  transition: background-color 0.2s ease;
 }
 
 .item + .item {
@@ -17,14 +19,28 @@
 }
 
 .item:hover {
-  background-color: #f0f0f0;
+  background-color: #efece7;
 }
 
 .completed {
   text-decoration: line-through;
-  color: #888;
+  color: #e0ddd4; /* muted warm beige for completed */
 }
 
 .checkbox {
   margin-right: 8px;
+}
+
+.deleteButton {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #666666;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0 4px;
+}
+
+.deleteButton:hover {
+  color: #333333;
 }
