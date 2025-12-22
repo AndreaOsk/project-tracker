@@ -26,17 +26,21 @@ The app allows users to view projects, track associated actions, and persist pro
 ---
 
 ## 📁 Project Structure
+
+```text
 src/
 ├── components/
-│ ├── ProjectList.jsx
-│ ├── ProjectDetail.jsx
-│ ├── ActionList.jsx
-│ ├── AddActionForm.jsx
-│ ├── ProjectList.module.css
-│ └── ProjectDetail.module.css
+│   ├── ProjectList.jsx
+│   ├── ProjectDetail.jsx
+│   ├── ActionList.jsx
+│   ├── AddActionForm.jsx
+│   ├── ProjectList.module.css
+│   └── ProjectDetail.module.css
 ├── App.jsx
 ├── App.module.css
 └── main.jsx
+
+```
 
 ---
 
