@@ -58,6 +58,8 @@ cd project-tracker
 npm install
 npm run dev
 
+```
+
 💾 Data Persistence
 
 Projects and actions are stored in the browser using localStorage.
