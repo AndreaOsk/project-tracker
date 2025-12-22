@@ -1,16 +1,91 @@
-# React + Vite
+# Project Tracker (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple, clean project tracking application built with React.  
+The app allows users to view projects, track associated actions, and persist progress using browser storage.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- View a list of projects with status
+- Select a project to see its details
+- Track actions (tasks) per project
+- Toggle action completion
+- Persistent state using `localStorage`
+- Clean, component-scoped styling using CSS Modules
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React** (Vite)
+- **JavaScript (ES6+)**
+- **CSS Modules**
+- **localStorage** for persistence
+
+---
+
+## 📁 Project Structure
+
+```text
+src/
+├── components/
+│   ├── ProjectList.jsx
+│   ├── ProjectDetail.jsx
+│   ├── ActionList.jsx
+│   ├── AddActionForm.jsx
+│   ├── ProjectList.module.css
+│   └── ProjectDetail.module.css
+├── App.jsx
+├── App.module.css
+└── main.jsx
+
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm
+
+### Installation
+
+```bash
+git clone https://github.com/AndreaOsk/project-tracker.git
+cd project-tracker
+npm install
+npm run dev
+
+```
+
+💾 Data Persistence
+
+Projects and actions are stored in the browser using localStorage.
+Refreshing the page will not reset progress.
+
+🎯 Roadmap / Planned Improvements
+
+- Visual highlight for selected project
+- Action creation UI improvements
+- Project creation form
+- TypeScript migration
+- Deployment (Vercel)
+- Improved accessibility and keyboard navigation
+
+👩‍💻 Author
+
+Andrea Eliasdottir
+- Background in Media Design and CAD
+- Currently working as a Project Manager in the water sector
+- Transitioning into frontend development
+
+GitHub: https://github.com/AndreaOsk
+
+📄 License
+
+This project is for learning and portfolio purposes.
+
+
+
