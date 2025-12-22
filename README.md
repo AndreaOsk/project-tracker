@@ -47,6 +47,7 @@ src/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v18+ recommended)
 - npm
 
@@ -77,6 +78,7 @@ Refreshing the page will not reset progress.
 👩‍💻 Author
 
 Andrea Eliasdottir
+
 - Background in Media Design and CAD
 - Currently working as a Project Manager in the water sector
 - Transitioning into frontend development
@@ -86,6 +88,3 @@ GitHub: https://github.com/AndreaOsk
 📄 License
 
 This project is for learning and portfolio purposes.
-
-
-

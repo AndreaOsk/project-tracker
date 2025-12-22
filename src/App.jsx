@@ -2,6 +2,7 @@ import {useState, useEffect } from "react";
 import styles from "./App.module.css";
 import ProjectList from "./components/ProjectList";
 import ProjectDetail from "./components/ProjectDetail";
+import AddProjectForm from "./components/AddProjectForm";
 
 function App() {
     // Define projects
@@ -88,11 +89,21 @@ function App() {
   }
 };
 
+const addProject = ({ name, status}) => {
+  const newId = projectsState.length
+  ? Math.max(...projectsState.map((p) => p.id)) + 1 : 1;
+
+  const newProject = {id: newId, name, status, actions: []};
+
+  setProjectsState((prev) => [...prev,newProject]);
+};
+
   //Return - anything after a return in the same function will not run
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Project Tracker</h1>
      
+     <AddProjectForm onAdd={addProject}/>
       <ProjectList 
         projects={projectsState} 
         selectedProjectId={selectedProject?.id}
