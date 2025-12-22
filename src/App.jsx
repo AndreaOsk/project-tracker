@@ -92,14 +92,13 @@ function App() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Project Tracker</h1>
-
-      {/* Pass the state updater into the list*/}
+     
       <ProjectList 
         projects={projectsState} 
+        selectedProjectId={selectedProject?.id}
         onSelectProject={setSelectedProject}
         />
 
-       {/* Show detail for selected projects*/} 
       <ProjectDetail 
       project={selectedProject}
       toggleAction={toggleAction}

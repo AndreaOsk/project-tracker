@@ -13,3 +13,8 @@
 .item:hover {
   background-color: #f0f0f0;
 }
+
+.selected {
+  background-color: #e8f0ff;
+  font-weight: 500;
+}
