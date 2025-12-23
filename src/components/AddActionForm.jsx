@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./AddActionForm.module.css";
 
 function AddActionForm({onAdd}) {
     const [actionName, setActionName] = useState("");
@@ -17,9 +18,9 @@ function AddActionForm({onAdd}) {
             value={actionName}
             onChange={(e) => setActionName(e.target.value)}
             placeholder="New action..."
-            style={{ padding: "4px", marginRight: "4px"}}
+            className={styles.inputWindow}
             />
-        <button type="submit">Add</button>
+        <button type="submit" className={styles.addButton}>Add</button>
         </form>
     );
 }

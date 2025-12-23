@@ -18,7 +18,7 @@ function ProjectDetail({ project, toggleAction, addAction, onDeleteProject, onDe
             
             
             <label className={styles.statusRow}>
-                status:{""}
+                Status:{""}
                 <select
                     className={styles.statusSelect}
                     value={project.status}
