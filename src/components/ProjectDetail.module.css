@@ -19,3 +19,15 @@
 .deleteProject {
   margin-top: 24px;
 }
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+
+.statusSelect {
+  padding: 6px 10px;
+  border-radius: 6px;
+}

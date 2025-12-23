@@ -1,5 +1,10 @@
 import styles from "./ProjectList.module.css";
 
+function statusClass(status) {
+    return status.toLowerCase().replaceAll(" ", "");
+  }
+  
+
 function ProjectList({ projects, selectedProjectId, onSelectProject}) {
     return ( 
         <div className={styles.cardContainer}>
@@ -8,12 +13,16 @@ function ProjectList({ projects, selectedProjectId, onSelectProject}) {
 
             return (
                 <button
+                    type="button"
                     key={project.id}
                     className={`${styles.card} ${isSelected ? styles.selected : ""}`}
                     onClick={() => onSelectProject(project)}
                 >
                     <h3 className={styles.cardTitle}>{project.name}</h3>
-                    <p className={styles.cardStatus}>{project.status}</p>
+                    
+                    <span className={`${styles.statusBadge} ${styles[statusClass(project.status)]}`}>
+                        {project.status}
+                    </span>
                 </button>
                 );
             })}

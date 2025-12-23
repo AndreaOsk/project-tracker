@@ -7,17 +7,7 @@ const STATUSES = [
     "Precom",
     "In Construction",
     "Reconciliation",
-    "Planned",
-    "Complete"
   ];
-
-function getNextStatus (current) {
-    const currentIndex = STATUSES.indexOf(current);
-    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
-    const nextIndex = (safeIndex + 1) % STATUSES.length;
-    return STATUSES[nextIndex];
-
-}
 
 function ProjectDetail({ project, toggleAction, addAction, onDeleteProject, onDeleteAction, onUpdateProjectStatus}) {
     if (!project) return null; // If nothing is selected, render nothing
@@ -27,9 +17,10 @@ function ProjectDetail({ project, toggleAction, addAction, onDeleteProject, onDe
             <h2 className={styles.heading}>{project.name}</h2>
             
             
-            <label>
+            <label className={styles.statusRow}>
                 status:{""}
                 <select
+                    className={styles.statusSelect}
                     value={project.status}
                     onChange={(e) => onUpdateProjectStatus(project.id, e.target.value)}
                 >
