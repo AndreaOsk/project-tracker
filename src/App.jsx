@@ -4,6 +4,39 @@ import ProjectList from "./components/ProjectList";
 import ProjectDetail from "./components/ProjectDetail";
 import AddProjectForm from "./components/AddProjectForm";
 
+const STATUSES = [
+  "Agreement Accepted",
+  "Precom",
+  "In Construction",
+  "Reconciliation",
+];
+
+const DEFAULT_STATUS = "Agreement Accepted"
+
+// Sanitizer function
+function sanitizeProjects(data, fallback = []){
+  if (!Array.isArray(data)) return fallback;
+
+  return data.map((p) => {
+    const rawStatus = String(p?.status ?? "").trim();
+    const status = STATUSES.includes(rawStatus) ? rawStatus : DEFAULT_STATUS;
+
+    return {
+    id: Number(p?.id) || Date.now(),
+    name: String(p?.name ?? ""),
+    status,
+    actions: Array.isArray(p?.actions)
+      ? p.actions.map((a) => ({
+        id: Number(a?.id) || Date.now(),
+        name: String(a?.name ?? ""),
+        completed: Boolean(a?.completed),
+      }))
+      : [],
+    };
+  });
+}
+
+
 function App() {
     // Demo data used only on first run (portfolio / showcase purposes)
     const demoProjects = [
@@ -26,10 +59,17 @@ function App() {
     },
   ];
 
-  // State initialisation
+  // State initialisation (with safety fallback)
   const [projectsState, setProjectsState] = useState(() => {
     const saved = localStorage.getItem("projects");
-    return saved ? JSON.parse(saved) : demoProjects;
+    if (!saved) return demoProjects;
+
+    try {
+      const parsed = JSON.parse(saved);
+      return sanitizeProjects(parsed, demoProjects);
+    } catch {
+      return demoProjects;
+    }
   });
 
   useEffect(() => {
@@ -52,41 +92,7 @@ function App() {
   }
 
   
-  // Toggle action function
-  const toggleAction = (projectId, actionId) => {
-    setProjectsState((prevProjects) =>
-      prevProjects.map((p) => {
-        if (p.id !== projectId) return p;
-        return {
-          ...p,
-          actions: p.actions.map((a) =>
-          a.id === actionId ? { ...a, completed: !a.completed } : a
-        ), 
-        };
-      })
-    );
-  };
-
-  const addAction = (projectId, actionName) => {
-    setProjectsState(prevProjects =>
-      prevProjects.map(p => {
-        if (p.id !== projectId) return p;
-  
-        const newId = p.actions.length
-          ? Math.max(...p.actions.map(a => a.id)) + 1
-          : 1;
-  
-        return {
-          ...p,
-          actions: [
-            ...p.actions,
-            { id: newId, name: actionName, completed: false }
-          ]
-        };
-      })
-    );
-  };
-  
+//Project functions
 
 const addProject = ({ name, status}) => {
   const newId = projectsState.length
@@ -106,6 +112,29 @@ const deleteProject = (projectId) => {
   }
 };
 
+
+//Action Functions
+
+const addAction = (projectId, actionName) => {
+  setProjectsState(prevProjects =>
+    prevProjects.map(p => {
+      if (p.id !== projectId) return p;
+
+      const newId = p.actions.length
+        ? Math.max(...p.actions.map(a => a.id)) + 1
+        : 1;
+
+      return {
+        ...p,
+        actions: [
+          ...p.actions,
+          { id: newId, name: actionName, completed: false }
+        ]
+      };
+    })
+  );
+};
+
 const deleteAction = (projectId, actionId) => {
   setProjectsState(prev =>
     prev.map(p => 
@@ -113,6 +142,20 @@ const deleteAction = (projectId, actionId) => {
         ? {...p, actions: p.actions.filter(a => a.id !== actionId)}
       : p
     )
+  );
+};
+
+const toggleAction = (projectId, actionId) => {
+  setProjectsState((prevProjects) =>
+    prevProjects.map((p) => {
+      if (p.id !== projectId) return p;
+      return {
+        ...p,
+        actions: p.actions.map((a) =>
+        a.id === actionId ? { ...a, completed: !a.completed } : a
+      ), 
+      };
+    })
   );
 };
 
