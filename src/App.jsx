@@ -42,6 +42,18 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null);
 
 
+  function updateProjectStatus(projectId, newStatus) {
+    setProjectsState ((prevProjects) => 
+      prevProjects.map((p) =>
+        p.id === projectId ? {...p, status: newStatus } : p 
+      )
+    );
+
+    if (selectedProject?.id === projectId) {
+      setSelectedProject((prev) => ({ ...prev, status: newStatus }));
+    }
+  }
+
   
   // Toggle action function
   const toggleAction = (projectId, actionId) => {
@@ -69,38 +81,42 @@ function App() {
   };
 
   const addAction = (projectId, actionName) => {
-    setProjectsState((prevProjects) =>
-    prevProjects.map(p => {
-    if (p.id !== projectId) return p;
-
-    const newId = p.actions.length 
-    ? Math.max(...p.actions.map(a => a.id)) + 1 : 1; 
-    
-    return {
-      ...p,
-      actions: [
-        ...p.actions, 
-        { id: newId, name: actionName, completed: false}
-      ]
-      };
-    })
-  );
-
-  if (selectedProject?.id === projectId) {
-    setSelectedProject(prev => {
-      const newId = prev.actions.length 
-    ? Math.max(...prev.actions.map(a => a.id)) + 1 : 1;
-    
-    return {
-      ...prev,
-      actions: [
-        ...prev.actions,
-        {id: newId, name: actionName, completed: false},
-      ]
-    };
-  });
-  }
-};
+    setProjectsState(prevProjects =>
+      prevProjects.map(p => {
+        if (p.id !== projectId) return p;
+  
+        const newId = p.actions.length
+          ? Math.max(...p.actions.map(a => a.id)) + 1
+          : 1;
+  
+        return {
+          ...p,
+          actions: [
+            ...p.actions,
+            { id: newId, name: actionName, completed: false }
+          ]
+        };
+      })
+    );
+  
+    // Keep selectedProject in sync
+    if (selectedProject?.id === projectId) {
+      setSelectedProject(prev => {
+        const newId = prev.actions.length
+          ? Math.max(...prev.actions.map(a => a.id)) + 1
+          : 1;
+  
+        return {
+          ...prev,
+          actions: [
+            ...prev.actions,
+            { id: newId, name: actionName, completed: false }
+          ]
+        };
+      });
+    }
+  };
+  
 
 const addProject = ({ name, status}) => {
   const newId = projectsState.length
@@ -155,6 +171,7 @@ if (selectedProject?.id === projectId) {
       addAction={addAction}
       onDeleteProject={deleteProject}
       onDeleteAction={deleteAction}
+      onUpdateProjectStatus={updateProjectStatus}
       />
     </div>
   );

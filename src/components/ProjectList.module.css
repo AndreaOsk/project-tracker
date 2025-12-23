@@ -18,8 +18,7 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  border: none;
-  background: none;
+  border: 2px solid transparent;
   text-align: left;
 }
 
@@ -33,7 +32,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.card.selected {
+.selected {
   border: 2px solid #d3cbb8; /*Not sure about this one*/
 }
 
