@@ -39,7 +39,11 @@ function App() {
     localStorage.setItem("projects", JSON.stringify(projectsState));
   }, [projectsState]);
 
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+
+  const selectedProject = projectsState.find(
+    (p) => p.id === selectedProjectId
+  ) ?? null;
 
 
   function updateProjectStatus(projectId, newStatus) {
@@ -68,16 +72,6 @@ function App() {
         };
       })
     );
-    
-    //Update selectedProject if it's the one being viewed
-    if (selectedProject?.id === projectId) {
-      setSelectedProject((prev) => ({
-        ...prev,
-        actions: prev.actions.map((a) => 
-        a.id === actionId ? { ...a, completed: !a.completed} :a
-      ),
-      }));
-    }
   };
 
   const addAction = (projectId, actionName) => {
@@ -98,23 +92,6 @@ function App() {
         };
       })
     );
-  
-    // Keep selectedProject in sync
-    if (selectedProject?.id === projectId) {
-      setSelectedProject(prev => {
-        const newId = prev.actions.length
-          ? Math.max(...prev.actions.map(a => a.id)) + 1
-          : 1;
-  
-        return {
-          ...prev,
-          actions: [
-            ...prev.actions,
-            { id: newId, name: actionName, completed: false }
-          ]
-        };
-      });
-    }
   };
   
 
@@ -131,8 +108,8 @@ const deleteProject = (projectId) => {
   setProjectsState(prev => prev.filter(p => p.id !== projectId));
 
   //If the deleted project is currently selected, clear selection
-  if (selectedProject?.id === projectId) {
-    setSelectedProject(null);
+  if (selectedProjectId === projectId) {
+    setSelectedProjectId(null);
   }
 };
 
@@ -144,13 +121,6 @@ const deleteAction = (projectId, actionId) => {
       : p
     )
   );
-
-if (selectedProject?.id === projectId) {
-  setSelectedProject(prev => ({
-    ...prev,
-    actions: prev.actions.filter(a => a.id !== actionId)
-    }));
-  }
 };
 
   //Return - anything after a return in the same function will not run
@@ -162,7 +132,7 @@ if (selectedProject?.id === projectId) {
       <ProjectList 
         projects={projectsState} 
         selectedProjectId={selectedProject?.id}
-        onSelectProject={setSelectedProject}
+        onSelectProject={(project) => setSelectedProjectId(project.id)}
         />
 
       <ProjectDetail 
