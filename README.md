@@ -75,12 +75,61 @@ Refreshing the page will not reset progress.
 - Deployment (Vercel)
 - Improved accessibility and keyboard navigation
 
+#Data Model
+
+The application is built around a small, stable data model designed to be easy to extend and reason about.
+
+Core Entities
+
+Project
+
+```bash
+{
+  id: number
+  name: string
+  status: string
+  actions: Action[]
+}
+```
+
+Action
+
+```bash
+{
+  id: number
+  name: string
+  completed: boolean
+}
+```
+
+State & Data Flow
+
+- All project data is stored in a single source of truth (projectsState) in App.jsx.
+- Child components receive data via props and request changes through callback functions.
+- The currently selected project is derived from state using its id, avoiding duplicated state and sync issues.
+
+Defaults & Validation
+
+- New projects are always created with a default status ("Agreement Accepted").
+- Project status cannot be set during creation; this business rule is enforced centrally.
+- Data loaded from localStorage is normalised to ensure it matches the expected shape, with safe defaults applied where needed.
+
+Persistence
+
+- Project data is persisted to localStorage.
+- On first run, a small set of demo projects is loaded for demonstration purposes.
+- Design Principles
+- Single source of truth
+- Clear ownership of business logic
+- Predictable defaults
+- Safe, incremental extensibility
+
 👩‍💻 Author
 
 Andrea Eliasdottir
 
 - Background in Media Design and CAD
-- Currently working as a Project Manager in the water sector
+- Currently working as a Project Manager in the utility sector
 - Transitioning into frontend development
 
 GitHub: https://github.com/AndreaOsk
