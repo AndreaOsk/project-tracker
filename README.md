@@ -1,33 +1,27 @@
-# Project Tracker (React)
+##Project Tracker (React)
 
-A simple, clean project tracking application built with React.  
-The app allows users to view projects, track associated actions, and persist progress using browser storage.
+A project tracking application built with React.
+The app allows users to manage projects, track associated actions, and persist progress using browser storage.
 
----
-
-## ✨ Features
+#✨ Features
 
 - View a list of projects with status
-- Select a project to see its details
+- Select a project to view details
 - Track actions (tasks) per project
 - Toggle action completion
-- Persistent state using `localStorage`
-- Clean, component-scoped styling using CSS Modules
+- Persistent state using localStorage
+- Component-scoped styling with CSS Modules
 
----
+#🛠 Tech Stack
 
-## 🛠 Tech Stack
+- React (Vite)
+- JavaScript (ES6+)
+- CSS Modules
+- localStorage for persistence
 
-- **React** (Vite)
-- **JavaScript (ES6+)**
-- **CSS Modules**
-- **localStorage** for persistence
+#📁 Project Structure
 
----
-
-## 📁 Project Structure
-
-```text
+```bash
 src/
 ├── components/
 │   ├── ProjectList.jsx
@@ -39,45 +33,32 @@ src/
 ├── App.jsx
 ├── App.module.css
 └── main.jsx
-
 ```
 
----
+#🚀 Getting Started
 
-## 🚀 Getting Started
-
-### Prerequisites
+Prerequisites
 
 - Node.js (v18+ recommended)
 - npm
 
-### Installation
+Installation
 
 ```bash
 git clone https://github.com/AndreaOsk/project-tracker.git
 cd project-tracker
 npm install
 npm run dev
-
 ```
 
-💾 Data Persistence
+#💾 Data Persistence
 
 Projects and actions are stored in the browser using localStorage.
 Refreshing the page will not reset progress.
 
-🎯 Roadmap / Planned Improvements
+#🧠 Data Model
 
-- Visual highlight for selected project
-- Action creation UI improvements
-- Project creation form
-- TypeScript migration
-- Deployment (Vercel)
-- Improved accessibility and keyboard navigation
-
-#Data Model
-
-The application is built around a small, stable data model designed to be easy to extend and reason about.
+The application is built around a small, stable data model designed to be easy to reason about and extend.
 
 Core Entities
 
@@ -102,10 +83,10 @@ Action
 }
 ```
 
-State & Data Flow
+State & Flow
 
 - All project data is stored in a single source of truth (projectsState) in App.jsx.
-- Child components receive data via props and request changes through callback functions.
+- Child components receive data via props and request updates through callback functions.
 - The currently selected project is derived from state using its id, avoiding duplicated state and sync issues.
 
 Defaults & Validation
@@ -113,27 +94,29 @@ Defaults & Validation
 - New projects are always created with a default status ("Agreement Accepted").
 - Project status cannot be set during creation; this business rule is enforced centrally.
 - Data loaded from localStorage is normalised to ensure it matches the expected shape, with safe defaults applied where needed.
+- On first run, a small set of demo projects is loaded for portfolio and demonstration purposes.
 
-Persistence
+#🎯 Roadmap / Planned Improvements
 
-- Project data is persisted to localStorage.
-- On first run, a small set of demo projects is loaded for demonstration purposes.
-- Design Principles
-- Single source of truth
-- Clear ownership of business logic
-- Predictable defaults
-- Safe, incremental extensibility
+- Visual highlight for selected project
+- Action creation UI improvements
+- Due dates and labels
+- Drag and drop
+- Filtering by status
+- TypeScript migration
+- Deployment (Vercel)
+- Improved accessibility and keyboard navigation
 
-👩‍💻 Author
+#👩‍💻 Author
 
 Andrea Eliasdottir
 
 - Background in Media Design and CAD
-- Currently working as a Project Manager in the utility sector
+- Project Manager in the utility sector
 - Transitioning into frontend development
 
 GitHub: https://github.com/AndreaOsk
 
-📄 License
+#📄 License
 
 This project is for learning and portfolio purposes.
