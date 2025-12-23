@@ -2,7 +2,14 @@ import ActionList from "./ActionList";
 import AddActionForm from "./AddActionForm";
 import styles from "./ProjectDetail.module.css";
 
-const STATUSES = ["planned", "Precom", "Complete"];
+const STATUSES = [
+    "Agreement Accepted",
+    "Precom",
+    "In Construction",
+    "Reconciliation",
+    "Planned",
+    "Complete"
+  ];
 
 function getNextStatus (current) {
     const currentIndex = STATUSES.indexOf(current);
@@ -18,15 +25,21 @@ function ProjectDetail({ project, toggleAction, addAction, onDeleteProject, onDe
     return (
         <div className={styles.card}>
             <h2 className={styles.heading}>{project.name}</h2>
-            <p className={styles.subtle}>Status: {project.status}</p>
-            <button
-            type="button"
-            onClick={() => 
-                onUpdateProjectStatus(project.id, getNextStatus(project.status))
-                }
-            >
-             Cycle status   
-            </button>
+            
+            
+            <label>
+                status:{""}
+                <select
+                    value={project.status}
+                    onChange={(e) => onUpdateProjectStatus(project.id, e.target.value)}
+                >
+                {STATUSES.map((s) => (
+                    <option key={s} value={s}>
+                        {s}
+                    </option>
+                ))}
+                </select>
+            </label>
 
             <h3>Actions</h3>
             <ActionList 
