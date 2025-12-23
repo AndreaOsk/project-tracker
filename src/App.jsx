@@ -5,34 +5,31 @@ import ProjectDetail from "./components/ProjectDetail";
 import AddProjectForm from "./components/AddProjectForm";
 
 function App() {
-    // Define projects
-    const projects = [
+    // Demo data used only on first run (portfolio / showcase purposes)
+    const demoProjects = [
     { 
       id: 1, 
       name: "Turweston Road Diversion", 
-      status: "Precom",
+      status: "Agreement Accepted",
       actions: [
-        {id: 1, name: "Confirm precom", completed: false},
+        {id: 1, name: "Confirm precom date", completed: false},
         {id: 2, name: "Book delivery agent", completed: true}
-      ] },
+      ], 
+    },
     { 
       id: 2,
       name: "Ransom Road", 
-      status: "Planned",
+      status: "Precom",
       actions: [
-        {id: 1, name: "Write Impact Plan", completed: false}
-      ] },
-    { 
-      id: 3, 
-      name: "Leyland Trading Estate", 
-      status: "Complete",
-      actions: []
-    }
+        {id: 1, name: "Write Impact Plan", completed: false},
+      ], 
+    },
   ];
-  // State declarations
+
+  // State initialisation
   const [projectsState, setProjectsState] = useState(() => {
     const saved = localStorage.getItem("projects");
-    return saved ? JSON.parse(saved) : projects;
+    return saved ? JSON.parse(saved) : demoProjects;
   });
 
   useEffect(() => {
@@ -52,10 +49,6 @@ function App() {
         p.id === projectId ? {...p, status: newStatus } : p 
       )
     );
-
-    if (selectedProject?.id === projectId) {
-      setSelectedProject((prev) => ({ ...prev, status: newStatus }));
-    }
   }
 
   
@@ -131,7 +124,7 @@ const deleteAction = (projectId, actionId) => {
      <AddProjectForm onAdd={addProject}/>
       <ProjectList 
         projects={projectsState} 
-        selectedProjectId={selectedProject?.id}
+        selectedProjectId={selectedProjectId}
         onSelectProject={(project) => setSelectedProjectId(project.id)}
         />
 
