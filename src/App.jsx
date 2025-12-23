@@ -37,7 +37,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("projects", JSON.stringify(projectsState));
-  })
+  }, [projectsState]);
 
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -70,22 +70,35 @@ function App() {
 
   const addAction = (projectId, actionName) => {
     setProjectsState((prevProjects) =>
-    prevProjects.map((p) => {
+    prevProjects.map(p => {
     if (p.id !== projectId) return p;
-    const newId = p.actions.length ? Math.max(...p.actions.map(a => a.id)) + 1 : 1; 
+
+    const newId = p.actions.length 
+    ? Math.max(...p.actions.map(a => a.id)) + 1 : 1; 
+    
     return {
       ...p,
-      actions: [...p.actions, { id: newId, name: actionName, completed: false}],
+      actions: [
+        ...p.actions, 
+        { id: newId, name: actionName, completed: false}
+      ]
       };
     })
   );
 
   if (selectedProject?.id === projectId) {
-    const newId = selectedProject.actions.length ? Math.max(...selectedProject.actions.map(a => a.id)) + 1 : 1;
-    setSelectedProject({
-      ...selectedProject,
-      actions: [...selectedProject.actions, { id:newId, name: actionName, completed: false}],
-    });
+    setSelectedProject(prev => {
+      const newId = prev.actions.length 
+    ? Math.max(...prev.actions.map(a => a.id)) + 1 : 1;
+    
+    return {
+      ...prev,
+      actions: [
+        ...prev.actions,
+        {id: newId, name: actionName, completed: false},
+      ]
+    };
+  });
   }
 };
 

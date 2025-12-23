@@ -9,8 +9,6 @@ function ProjectDetail({ project, toggleAction, addAction, onDeleteProject, onDe
         <div className={styles.card}>
             <h2 className={styles.heading}>{project.name}</h2>
             <p className={styles.subtle}>Status: {project.status}</p>
-            <button onClick={() => onDeleteProject(project.id)}>Delete Project</button>
-
 
             <h3>Actions</h3>
             <ActionList 
@@ -20,6 +18,8 @@ function ProjectDetail({ project, toggleAction, addAction, onDeleteProject, onDe
             />
 
             <AddActionForm onAdd={(name) => addAction(project.id, name)}/>
+            
+            <button className={styles.deleteProject} onClick={() => onDeleteProject(project.id)}>Delete Project</button>
         </div>
     );
 

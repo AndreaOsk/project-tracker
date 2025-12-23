@@ -2,23 +2,22 @@ import styles from "./ProjectList.module.css";
 
 function ProjectList({ projects, selectedProjectId, onSelectProject}) {
     return ( 
-        <ul className={styles.list}>
+        <div className={styles.cardContainer}>
             {projects.map((project) => {
                 const isSelected = project.id === selectedProjectId;
 
             return (
-                <li 
+                <div 
                     key={project.id}
-                    className={`${styles.item} ${
-                        isSelected ? styles.selected : ""
-                    }`}
+                    className={`${styles.card} ${isSelected ? styles.selected : ""}`}
                     onClick={() => onSelectProject(project)}
                 >
-                    {project.name} - {project.status}
-                </li>
+                    <h3 className={styles.cardTitle}>{project.name}</h3>
+                    <p className={styles.cardStatus}>{project.status}</p>
+                </div>
                 );
             })}
-        </ul>
+        </div>
     );
 }
 
