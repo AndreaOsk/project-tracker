@@ -91,14 +91,14 @@ function App() {
     );
   }
 
-  
+
 //Project functions
 
-const addProject = ({ name, status}) => {
+const addProject = ({ name }) => {
   const newId = projectsState.length
   ? Math.max(...projectsState.map((p) => p.id)) + 1 : 1;
 
-  const newProject = {id: newId, name, status, actions: []};
+  const newProject = {id: newId, name, status: DEFAULT_STATUS, actions: []};
 
   setProjectsState((prev) => [...prev,newProject]);
 };
