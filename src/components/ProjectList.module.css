@@ -18,6 +18,14 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.card:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
 }
 
 .card:hover {

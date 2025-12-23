@@ -7,14 +7,14 @@ function ProjectList({ projects, selectedProjectId, onSelectProject}) {
                 const isSelected = project.id === selectedProjectId;
 
             return (
-                <div 
+                <button
                     key={project.id}
                     className={`${styles.card} ${isSelected ? styles.selected : ""}`}
                     onClick={() => onSelectProject(project)}
                 >
                     <h3 className={styles.cardTitle}>{project.name}</h3>
                     <p className={styles.cardStatus}>{project.status}</p>
-                </div>
+                </button>
                 );
             })}
         </div>
